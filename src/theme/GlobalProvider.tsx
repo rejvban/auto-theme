@@ -11,13 +11,11 @@ interface GlobalContext {
 export const GlobalContext = createContext<GlobalContext | null>(null);
 
 const GlobalProvider: React.FC = (props) => {
-  const darkDefault: boolean = window.matchMedia(
+  const darkDefault: MediaQueryList = window.matchMedia(
     "(prefers-color-scheme : dark)"
-  )
-    ? true
-    : false;
+  );
 
-  const [dark, setTheme] = useState<boolean>(darkDefault);
+  const [dark, setTheme] = useState<boolean>(darkDefault.matches);
 
   return (
     <GlobalContext.Provider
